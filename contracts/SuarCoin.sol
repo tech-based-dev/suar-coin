@@ -12,11 +12,9 @@ contract SuarCoin {
 		uint256 _value
 	);
 
-	// This part responsibles to map every address to its balance
 	mapping(address => uint256) public balanceOf;
 
 	constructor (uint256 _initialSupply) public {
-		// Allocate the initial supply
 		balanceOf[msg.sender] = _initialSupply;
 
 		totalSupply = _initialSupply;
@@ -31,5 +29,9 @@ contract SuarCoin {
 		Transfer(msg.sender, _to, _value);
 
 		return true;
+	}
+
+	function approve (address _spender, uint256 _value) public returns (bool success) {
+		
 	}
 }
