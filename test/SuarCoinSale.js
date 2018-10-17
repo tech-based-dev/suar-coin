@@ -25,4 +25,24 @@ contract('SuarCoinSale', function (accounts) {
 				assert.equal(price, tokenPrice, 'Token price is correct');
 			})
 	});
+
+	it ('Facilitates token buying', function() {
+		return SuarCoinSale.deployed()
+			.then(function(instance) {
+				tokenSaleInstance = instance;
+				var buyer = accounts[1];
+				var numberOfTokens = 10;
+				var value = numberOfTokens * tokenPrice;
+
+				return tokenSaleInstance.buyTokens(numberOfTokens, { from: buyer, value: value });
+			})
+			.then(function(receipt) {
+				tokenSaleInstance = instance;
+				
+				return tokenSaleInstance.tokenSold();
+			})
+			.then(function(amount) {
+				assert.equal(amount.toNumber(), numberOfTokens, 'Increments the number of token sold');
+			})
+		});
 });

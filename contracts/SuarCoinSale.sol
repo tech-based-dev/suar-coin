@@ -12,4 +12,8 @@ contract SuarCoinSale {
 		tokenContract = _tokenContract;
 		tokenPrice = _tokenPrice;
 	}
+
+	function buyTokens (uint256 _numberOfTokens) public payable {
+		
+	}
 }
