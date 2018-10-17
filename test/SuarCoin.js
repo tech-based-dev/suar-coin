@@ -4,31 +4,37 @@ contract('SuarCoin', function (accounts) {
 	var tokenInstance;
 
 	it ('Initializes the contract with correct values', function() {
-		return SuarCoin.deployed().then(function(instance) {
-			tokenInstance = instance;
-			return tokenInstance.name();
-		})
-		.then(function(name) {
-			assert.equal(name, 'SuarCoin', 'Has the correct name');
-			return tokenInstance.symbol();
-		})
-		.then(function(symbol) {
-			assert.equal(symbol, 'SRC', 'Has the correct symbol');
-			return tokenInstance.standard();
-		})
-		.then(function(standard) {
-			assert.equal(standard, 'SuarCoin v1.0.0', 'Has the correct standard');
-		})
+		return SuarCoin.deployed()
+			.then(function(instance) {
+				tokenInstance = instance;
+
+				return tokenInstance.name();
+			})
+			.then(function(name) {
+				assert.equal(name, 'SuarCoin', 'Has the correct name');
+
+				return tokenInstance.symbol();
+			})
+			.then(function(symbol) {
+				assert.equal(symbol, 'SRC', 'Has the correct symbol');
+
+				return tokenInstance.standard();
+			})
+			.then(function(standard) {
+				assert.equal(standard, 'SuarCoin v1.0.0', 'Has the correct standard');
+			})
 	});
 
 	it ('Allocates the initial supply upon deployment', function () {
 		return SuarCoin.deployed()
 			.then(function (instance) {
 				tokenInstance = instance;
+
 				return tokenInstance.totalSupply();
 			})
 			.then(function (totalSupply) {
 				assert.equal(totalSupply.toNumber(), 1000000000, 'sets the total supply to 1.000.000.000');
+				
 				return tokenInstance.balanceOf(accounts[0]);
 			})
 			.then(function (adminBalance) {
@@ -65,6 +71,7 @@ contract('SuarCoin', function (accounts) {
 			})
 			.then (function (balance) {
 				assert.equal(balance.toNumber(), 100000000, 'Adds the amount to the receiving account');
+				
 				return tokenInstance.balanceOf(accounts[0]);
 			})
 			.then (function (balance) {
@@ -76,10 +83,12 @@ contract('SuarCoin', function (accounts) {
 		return SuarCoin.deployed()
 			.then (function(instance) {
 				tokenInstance = instance;
+				
 				return tokenInstance.approve.call(accounts[1], 100);
 			})
 			.then (function (success) {
 				assert.equal(success, true, 'Transfer returns true');
+				
 				return tokenInstance.approve(accounts[1], 100, { from: accounts[0] });
 			})
 			.then (function (receipt) {
