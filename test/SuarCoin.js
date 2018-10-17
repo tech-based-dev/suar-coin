@@ -136,14 +136,17 @@ contract('SuarCoin', function (accounts) {
 				return tokenInstance.balanceOf(fromAccount);
 			})
 			.then(function (balance) {
-				assert.equal(balance, 90, 'Deducts the amount from the sending account');
+				assert.equal(balance.toNumber(), 90, 'Deducts the amount from the sending account');
 
 				return tokenInstance.balanceOf(toAccount);
 			})
 			.then(function (balance) {
-				assert.equal(balance, 10, 'Transfered amount');
+				assert.equal(balance.toNumber(), 10, 'Transfered amount to the receiver');
 
-				// return tokenInstance.balanceOf(toAccount);
+				return tokenInstance.allowance(fromAccount, spenderAccount);
+			})
+			.then(function (allowance) {
+				assert.equal(allowance.toNumber(), 0, 'Remaining allowance');
 			})
 	})
 });

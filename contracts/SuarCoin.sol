@@ -51,7 +51,9 @@ contract SuarCoin {
 		require(_value <= allowance[_from][msg.sender]);
 
 		balanceOf[_from] -= _value;
-		//balanceOf[_to] += _value;
+		balanceOf[_to] += _value;
+
+		allowance[_from][msg.sender] -= _value;
 
 		Transfer(_from, _to, _value);
 
