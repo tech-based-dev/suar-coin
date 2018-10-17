@@ -2,6 +2,7 @@ var SuarCoinSale = artifacts.require('./SuarCoinSale.sol');
 
 contract('SuarCoinSale', function (accounts) {
 	var tokenSaleInstance;
+	var buyer = accounts[1];
 	var tokenPrice = 490000000000000;
 
 	it ('Initializes the contract with correct values', function() {
@@ -29,16 +30,13 @@ contract('SuarCoinSale', function (accounts) {
 	it ('Facilitates token buying', function() {
 		return SuarCoinSale.deployed()
 			.then(function(instance) {
-				tokenSaleInstance = instance;
-				var buyer = accounts[1];
+				tokenSaleInstance = instance; 
 				var numberOfTokens = 10;
 				var value = numberOfTokens * tokenPrice;
 
 				return tokenSaleInstance.buyTokens(numberOfTokens, { from: buyer, value: value });
 			})
 			.then(function(receipt) {
-				tokenSaleInstance = instance;
-				
 				return tokenSaleInstance.tokenSold();
 			})
 			.then(function(amount) {
