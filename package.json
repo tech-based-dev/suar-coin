@@ -1,0 +1,29 @@
+{
+  "name": "suarcoin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "keywords": [
+    "suarcoin",
+    "token",
+    "blockchain",
+    "suar",
+    "coin",
+    "cryptocurrency"
+  ],
+  "author": "priyono.arif@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "truffle-hdwallet-provider": "0.0.6"
+  },
+  "devDependencies": {
+    "lite-server": "^2.4.0"
+  }
+}

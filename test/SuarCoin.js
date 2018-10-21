@@ -42,9 +42,9 @@ contract('SuarCoin', function (accounts) {
 			})
 	});
 
-	it ('Transfers token ownership', function () {
+	it ('Transfers token ownership', () => {
 		return SuarCoin.deployed()
-			.then (function(instance) {
+			.then ((instance) => {
 				tokenInstance = instance;
 
 				return tokenInstance.transfer.call(accounts[1], 9999999999999999999);
@@ -55,7 +55,7 @@ contract('SuarCoin', function (accounts) {
 
 				return tokenInstance.transfer.call(accounts[1], 100000000, { from: accounts[0] })
 			})
-			.then (function (success) {
+			.then ((success) => {
 				assert.equal(success, true, 'It returns true');
 
 				return tokenInstance.transfer(accounts[1], 100000000, { from: accounts[0] });
